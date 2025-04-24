@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loan Management</title>
+  <link rel="stylesheet" href="css/loan.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Loan Management</h1>
+
+    <!-- Apply Loan Section -->
+    <section>
+      <h2>Apply for a Loan</h2>
+      <form id="loanForm">
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" required />
+
+        <label for="termMonths">Term (in months):</label>
+        <input type="number" id="termMonths" required />
+
+        <button type="submit">Apply Loan</button>
+      </form>
+    </section>
+
+    <hr />
+
+    <!-- View Loans Section -->
+    <section>
+      <h2>My Loans</h2>
+      <div id="loanList">Loading...</div>
+    </section>
+  </div>
+
+  <script src="js/loans.js"></script>
+</body>
+</html>

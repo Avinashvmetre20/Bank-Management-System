@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accounts</title>
+  <link rel="stylesheet" href="css/account.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Your Bank Accounts</h1>
+    
+    <!-- Account Creation Form -->
+    <section>
+      <h2>Create a New Account</h2>
+      <form id="createAccountForm">
+        <label for="accountType">Account Type:</label>
+        <select id="accountType" required>
+          <option value="">-- Select --</option>
+          <option value="savings">Savings</option>
+          <option value="current">Current</option>
+        </select>
+        <button type="submit">Create Account</button>
+      </form>
+    </section>
+
+    <hr />
+
+    <!-- Account List Section -->
+    <section>
+      <h2>Your Accounts</h2>
+      <div id="accountsList">Loading accounts...</div>
+    </section>
+    
+    <a href="profile.html">← Back to Profile</a>
+  </div>
+
+  <script src="js/accounts.js"></script>
+</body>
+</html>

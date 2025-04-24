@@ -1,0 +1,62 @@
+.card-container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 2rem;
+    background: #f7f9fc;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-container h2 {
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+  
+  .card-form label,
+  .card-form select {
+    display: block;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  
+  .card-form select,
+  .card-form button {
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+  
+  .card-form button {
+    background: #667eea;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .card-form button:hover {
+    background: #556cd6;
+  }
+  
+  .card-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  }
+  
+  .card-actions button {
+    margin-right: 10px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: none;
+    color: white;
+    background-color: #667eea;
+    cursor: pointer;
+  }
+  
+  .card-actions button:last-child {
+    background-color: #e74c3c;
+  }
+  

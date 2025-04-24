@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+    <div class="admin-panel">
+        <h1>Admin Dashboard</h1>
+
+        <div class="stats">
+            <div><strong>Total Users:</strong> <span id="totalUsers">Loading...</span></div>
+            <div><strong>Total Accounts:</strong> <span id="totalAccounts">Loading...</span></div>
+            <div><strong>Total Loans:</strong> <span id="totalLoans">Loading...</span></div>
+            <div><strong>Total Cards:</strong> <span id="totalCards">Loading...</span></div>
+            <div><strong>Bank Balance:</strong> ₹<span id="bankBalance">Loading...</span></div>
+            <div><strong>Total Deposits:</strong> ₹<span id="totalDeposits">Loading...</span></div>
+        </div>
+
+        <h2>Approve Cards</h2>
+        <div id="cardList"></div>
+
+        <h2>Approve Loans</h2>
+        <div id="loanList"></div>
+    </div>
+
+    <script src="js/adminPanel.js"></script>
+</body>
+</html>

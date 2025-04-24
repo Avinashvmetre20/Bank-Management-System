@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Transaction History</title>
+  <link rel="stylesheet" href="css/transaction.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Transaction History</h1>
+
+    <div id="txnActions">
+      <button onclick="openForm('deposit')">Deposit</button>
+      <button onclick="openForm('withdraw')">Withdraw</button>
+      <button onclick="openForm('transfer')">Transfer</button>
+      <button onclick="downloadPDF()">Download PDF</button>
+    </div>
+
+    <div id="transactionList">Loading transactions...</div>
+
+    <hr />
+    <div>
+      <a href="accounts.html">← Back to Accounts</a> |
+      <a href="loans.html">Loans</a> |
+      <a href="cards.html">Cards</a>
+    </div>
+  </div>
+
+  <!-- Transaction Forms (Modal Style) -->
+  <div id="formContainer" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="formTitle"></h3>
+      <form id="txnForm">
+        <input type="hidden" id="actionType" />
+        <label for="accountId">Account ID:</label>
+        <input type="text" id="accountId" required />
+        <div id="toAccountField" class="hidden">
+          <label for="toId">To Account ID:</label>
+          <input type="text" id="toId" />
+        </div>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" required />
+        <button type="submit">Submit</button>
+        <button type="button" onclick="closeForm()">Cancel</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/transactions.js"></script>
+</body>
+</html>

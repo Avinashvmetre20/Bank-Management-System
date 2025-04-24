@@ -1,0 +1,44 @@
+.admin-dashboard {
+    padding: 2rem;
+    margin-top: 80px;
+    color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .admin-dashboard h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #667eea;
+    margin-bottom: 2rem;
+  }
+  
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .dashboard-card {
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .dashboard-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .dashboard-card p {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  

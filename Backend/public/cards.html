@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Card Management</title>
+  <link rel="stylesheet" href="css/card.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Card Management</h1>
+
+    <!-- Request Card Section -->
+    <section>
+      <h2>Request a New Card</h2>
+      <form id="cardForm">
+        <label for="accountId">Account ID:</label>
+        <input type="text" id="accountId" required />
+
+        <label for="cardType">Card Type:</label>
+        <select id="cardType" required>
+          <option value="">-- Select --</option>
+          <option value="debit">Debit</option>
+          <option value="credit">Credit</option>
+        </select>
+
+        <button type="submit">Request Card</button>
+      </form>
+    </section>
+
+    <hr />
+
+    <!-- View Cards Section -->
+    <section>
+      <h2>My Cards</h2>
+      <div id="cardList">Loading...</div>
+    </section>
+  </div>
+
+  <script src="js/cards.js"></script>
+</body>
+</html>

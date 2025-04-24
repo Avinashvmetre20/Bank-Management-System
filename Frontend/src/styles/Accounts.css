@@ -1,0 +1,34 @@
+.accounts-page {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 1rem;
+    background-color: #ffffffdd;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(6px);
+  }
+  
+  .account-form {
+    margin-bottom: 2rem;
+  }
+  
+  .account-form select,
+  .account-form button {
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  
+  .accounts-list {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .account-card {
+    padding: 1rem;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    color: #fff;
+    border-radius: 12px;
+  }
+  
