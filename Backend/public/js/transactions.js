@@ -1,24 +1,25 @@
 const token = localStorage.getItem('token');
 const listDiv = document.getElementById('transactionList');
+const messageDiv = document.createElement('div');
+messageDiv.className = 'message';
+listDiv.parentNode.insertBefore(messageDiv, listDiv);
 
-if (!token) {
-  alert('Please login first');
-  window.location.href = 'index.html';
+function showMessage(msg, color = '#e53935') {
+  messageDiv.textContent = msg;
+  messageDiv.style.color = color;
+}
+function clearMessage() {
+  messageDiv.textContent = '';
 }
 
-fetch('http://localhost:8080/api/transactions', {
-  headers: { Authorization: `Bearer ${token}` },
-})
-  .then(res => res.json())
-  .then(data => {
-    if (!Array.isArray(data)) throw new Error('Invalid response');
+if (!token) {
+  showMessage('Please login first.');
+  setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+}
 
-    if (data.length === 0) {
-      listDiv.innerHTML = '<p>No transactions found.</p>';
-      return;
-    }
-
-    listDiv.innerHTML = `
+function renderTransactionsTable(data) {
+  return `
+    <div class="table-responsive">
       <table>
         <thead>
           <tr>
@@ -43,12 +44,32 @@ fetch('http://localhost:8080/api/transactions', {
           `).join('')}
         </tbody>
       </table>
-    `;
+    </div>
+  `;
+}
+
+function fetchTransactions() {
+  clearMessage();
+  fetch('http://localhost:8080/api/transactions', {
+    headers: { Authorization: `Bearer ${token}` },
   })
-  .catch(err => {
-    console.error(err);
-    listDiv.innerHTML = '<p>Error loading transactions</p>';
-  });
+    .then(res => res.json())
+    .then(data => {
+      if (!Array.isArray(data)) throw new Error('Invalid response');
+      if (data.length === 0) {
+        listDiv.innerHTML = '<p>No transactions found.</p>';
+        return;
+      }
+      listDiv.innerHTML = renderTransactionsTable(data);
+    })
+    .catch(err => {
+      console.error(err);
+      showMessage('Error loading transactions');
+      listDiv.innerHTML = '';
+    });
+}
+
+fetchTransactions();
 
 // Transaction Form Logic
 function openForm(type) {
@@ -64,7 +85,7 @@ function closeForm() {
 
 document.getElementById('txnForm').addEventListener('submit', async (e) => {
   e.preventDefault();
-
+  clearMessage();
   const type = document.getElementById('actionType').value;
   const accountId = document.getElementById('accountId').value;
   const amount = document.getElementById('amount').value;
@@ -90,10 +111,10 @@ document.getElementById('txnForm').addEventListener('submit', async (e) => {
   const result = await res.json();
 
   if (res.ok) {
-    alert('Transaction successful!');
-    location.reload();
+    showMessage('Transaction successful!', '#388e3c');
+    setTimeout(() => location.reload(), 1000);
   } else {
-    alert(result.message || 'Transaction failed');
+    showMessage(result.message || 'Transaction failed');
   }
 });
 
@@ -124,6 +145,6 @@ function downloadPDF() {
       })
       .catch(error => {
         console.error('Error downloading PDF:', error);
-        alert('Failed to download transaction report: ' + error.message);
+        showMessage('Failed to download transaction report: ' + error.message);
       });
   }

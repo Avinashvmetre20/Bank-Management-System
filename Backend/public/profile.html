@@ -4,88 +4,123 @@
   <meta charset="UTF-8" />
   <title>Profile</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
-    /* Navbar styles */
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      min-height: 100vh;
+    }
     .navbar {
-      background-color: #2c3e50;
-      padding: 10px 20px;
+      background-color: #1565c0;
+      padding: 18px 0;
       color: #fff;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.08);
     }
-
+    .navbar .logo {
+      font-size: 2rem;
+      margin-right: 12px;
+      color: #fff;
+    }
     .navbar h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 1.7rem;
+      font-weight: 700;
+      letter-spacing: 1px;
     }
-
-    .navbar a, .navbar button {
-      color: #fff;
-      text-decoration: none;
-      padding: 8px 16px;
-      background-color: #3498db;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    .navbar a:hover, .navbar button:hover {
-      background-color: #2980b9;
-    }
-
-    /* Container for profile */
-    .container {
+    .profile-card {
       max-width: 500px;
-      margin: 50px auto;
-      padding: 20px;
-      border-radius: 10px;
+      margin: 40px auto 0 auto;
       background: #fff;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(21,101,192,0.10);
+      padding: 36px 32px 28px 32px;
+      animation: fadeIn 1s cubic-bezier(.39,.575,.56,1.000);
     }
-
     h1 {
-      color: #3498db;
+      color: #1565c0;
       text-align: center;
     }
-
-    p {
-      font-size: 16px;
-      margin: 10px 0;
+    .profile-info {
+      margin: 24px 0;
+      font-size: 1.08rem;
+      color: #333;
     }
-
-    a {
+    .profile-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .profile-links a {
       display: block;
       text-align: center;
-      color: #2980b9;
-      text-decoration: none;
-      margin-top: 20px;
-      font-weight: bold;
+      color: #1976d2;
+      text-decoration: underline;
+      font-weight: 500;
+      padding: 10px 0;
+      border-radius: 6px;
+      background: #f7fafc;
+      transition: background 0.2s, color 0.2s;
     }
-
-    a:hover {
-      color: #1abc9c;
+    .profile-links a:hover {
+      color: #0d47a1;
+      background: #e3f2fd;
+    }
+    .logout-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, #e53935 60%, #ff7043 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 18px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 8px rgba(229,57,53,0.08);
+      display: none;
+    }
+    .logout-btn.visible {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 600px) {
+      .profile-card {
+        padding: 18px 6vw 18px 6vw;
+        margin: 20px 0 0 0;
+      }
+      .navbar h1 {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Navbar -->
   <div class="navbar">
+    <span class="logo"><i class="fas fa-university"></i></span>
     <h1>Bank Management</h1>
-    <div>
-      <button id="logoutBtn" style="display: none;">Logout</button>
-    </div>
   </div>
-
-  <!-- Profile Container -->
-  <div class="container">
+  <div class="profile-card">
     <h1>User Profile</h1>
-    <div id="profileData"></div>
-    <a href="accounts.html">Go to Accounts</a><br>
-    <a id="adminLink" href="adminPanel.html" style="display: none;">Admin Panel</a>
+    <div class="profile-info" id="profileData"></div>
+    <div class="profile-links">
+      <a href="accounts.html">Go to Accounts</a>
+      <a id="adminLink" href="adminPanel.html" style="display: none;">Admin Panel</a>
+    </div>
+    <button id="logoutBtn" class="logout-btn">Logout</button>
   </div>
-
   <script src="js/profile.js"></script>
 </body>
 </html>

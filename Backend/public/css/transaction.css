@@ -1,11 +1,22 @@
 /* General Styles */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f6f9;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
     margin: 0;
     padding: 0;
-  }
-  
+}
+
+/* Table Responsive Wrapper */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Remove old .container, button, modal styles for transactions page, keep for other pages */
+/* The transactions page now uses .transactions-card, .txn-actions, .txn-btn, .transactions-list, .modal, .modal-content, .navbar (see inline style in transactions.html) */
+
+/* Keep unrelated styles for other pages below */
   .container {
     width: 80%;
     margin: 50px auto;
@@ -193,8 +204,13 @@ body {
       padding: 10px;
     }
   
+    .table-responsive {
+      margin-bottom: 16px;
+    }
+
     table {
       font-size: 14px;
+      min-width: 600px;
     }
   
     th, td {

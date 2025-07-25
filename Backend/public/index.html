@@ -4,142 +4,182 @@
   <meta charset="UTF-8" />
   <title>Bank Login/Register</title>
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   <style>
     body {
       margin: 0;
-      font-family: 'Arial', sans-serif;
-      background: #f0f0f0;
-      transition: background-color 0.3s ease;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+      min-height: 100vh;
     }
-
     .navbar {
-      background-color: #1abc9c;
-      padding: 10px 20px;
+      background-color: #1565c0;
+      padding: 18px 0;
       color: #fff;
       display: flex;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
-      position: relative;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.08);
     }
-
+    .navbar .logo {
+      font-size: 2rem;
+      margin-right: 12px;
+      color: #fff;
+    }
     .navbar h1 {
       margin: 0;
-      font-size: 24px;
+      font-size: 1.7rem;
       font-weight: 700;
+      letter-spacing: 1px;
     }
-
-    .navbar button {
-      background-color: #e74c3c;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 14px;
-      transition: all 0.3s ease;
-      display: none; /* Hidden by default */
-    }
-
-    .navbar button:hover {
-      background-color: #c0392b;
-      transform: scale(1.05);
-    }
-
-    .container {
-      max-width: 400px;
-      margin: 50px auto;
-      padding: 20px;
-      border-radius: 10px;
+    .auth-card {
+      max-width: 380px;
+      margin: 60px auto 0 auto;
       background: #fff;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      animation: fadeIn 1s ease-in-out;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(21,101,192,0.10);
+      padding: 36px 32px 28px 32px;
+      animation: fadeIn 1s cubic-bezier(.39,.575,.56,1.000);
     }
-
-    h2 {
-      color: #3498db;
-      text-align: center;
+    .tab-switch {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 28px;
     }
-
-    input {
-      margin-bottom: 15px;
-      padding: 12px;
-      width: 100%;
-      font-size: 16px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-      transition: border-color 0.3s ease;
-    }
-
-    input:focus {
-      border-color: #3498db;
-      outline: none;
-    }
-
-    button {
-      padding: 12px;
-      background-color: #3498db;
-      color: white;
+    .tab-btn {
+      flex: 1;
+      padding: 10px 0;
+      background: none;
       border: none;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1565c0;
+      border-bottom: 2.5px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .tab-btn.active {
+      color: #0d47a1;
+      border-bottom: 2.5px solid #1565c0;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      color: #0d47a1;
+      font-size: 0.98rem;
+      font-weight: 500;
+    }
+    .form-group input {
       width: 100%;
+      padding: 11px 12px;
+      border-radius: 6px;
+      border: 1.5px solid #b0bec5;
+      font-size: 1rem;
+      transition: border-color 0.2s;
+      background: #f7fafc;
+    }
+    .form-group input:focus {
+      border-color: #1565c0;
+      outline: none;
+      background: #fff;
+    }
+    .auth-btn {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(90deg, #1565c0 60%, #42a5f5 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: 600;
       cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-      transition: background-color 0.3s ease;
+      margin-top: 8px;
+      transition: background 0.2s, transform 0.1s;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.08);
     }
-
-    button:hover {
-      background-color: #2980b9;
+    .auth-btn:hover {
+      background: linear-gradient(90deg, #0d47a1 60%, #1976d2 100%);
+      transform: translateY(-2px) scale(1.02);
     }
-
-    .toggle {
-      margin-top: 15px;
+    .toggle-link {
+      display: block;
       text-align: center;
-      color: #2980b9;
+      margin-top: 18px;
+      color: #1976d2;
+      font-size: 0.98rem;
       cursor: pointer;
-      font-size: 14px;
-      font-weight: bold;
+      text-decoration: underline;
+      font-weight: 500;
     }
-
+    .message {
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 1rem;
+      color: #e53935;
+      min-height: 22px;
+      transition: color 0.2s;
+    }
     @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @media (max-width: 500px) {
+      .auth-card {
+        padding: 18px 6vw 18px 6vw;
+        margin: 30px 0 0 0;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
+      .navbar h1 {
+        font-size: 1.1rem;
       }
     }
   </style>
 </head>
 <body>
-
   <div class="navbar">
+    <span class="logo"><i class="fas fa-university"></i></span>
     <h1>Bank Management</h1>
-    <button id="logoutBtn">Logout</button>
   </div>
-
-  <div class="container">
-    <!-- Login Form -->
+  <div class="auth-card">
+    <div class="tab-switch">
+      <button class="tab-btn active" id="loginTab" type="button">Login</button>
+      <button class="tab-btn" id="registerTab" type="button">Register</button>
+    </div>
+    <div class="message" id="formMessage"></div>
     <form id="loginForm">
-      <h2>Login</h2>
-      <input type="email" id="loginEmail" placeholder="Email" required />
-      <input type="password" id="loginPassword" placeholder="Password" required />
-      <button type="submit">Login</button>
-      <div class="toggle" id="toRegister">Don't have an account? Register</div>
+      <div class="form-group">
+        <label for="loginEmail">Email</label>
+        <input type="email" id="loginEmail" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" placeholder="Enter your password" required />
+      </div>
+      <button class="auth-btn" type="submit">Login</button>
+      <span class="toggle-link" id="toRegister">Don't have an account? Register</span>
     </form>
-
-    <!-- Register Form -->
     <form id="registerForm" style="display: none;">
-      <h2>Register</h2>
-      <input type="text" id="registerName" placeholder="Name" required />
-      <input type="email" id="registerEmail" placeholder="Email" required />
-      <input type="password" id="registerPassword" placeholder="Password" required />
-      <button type="submit">Register</button>
-      <div class="toggle" id="toLogin">Already have an account? Login</div>
+      <div class="form-group">
+        <label for="registerName">Name</label>
+        <input type="text" id="registerName" placeholder="Enter your name" required />
+      </div>
+      <div class="form-group">
+        <label for="registerEmail">Email</label>
+        <input type="email" id="registerEmail" placeholder="Enter your email" required />
+      </div>
+      <div class="form-group">
+        <label for="registerPassword">Password</label>
+        <input type="password" id="registerPassword" placeholder="Create a password" required />
+      </div>
+      <button class="auth-btn" type="submit">Register</button>
+      <span class="toggle-link" id="toLogin">Already have an account? Login</span>
     </form>
   </div>
-
   <script src="js/auth.js"></script>
 </body>
 </html>

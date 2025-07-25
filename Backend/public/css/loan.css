@@ -8,19 +8,11 @@
   }
   
   body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    color: #333;
-  }
-  
-  .container {
-    width: 80%;
-    max-width: 900px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #fff;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+    margin: 0;
+    padding: 0;
+}
   
   h1 {
     font-size: 2rem;
@@ -34,11 +26,7 @@
   }
   
   /* Loan Form */
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+  /* The loans page now uses .loans-card, .form-group, .loans-btn, .loans-list, .navbar (see inline style in loans.html) */
   
   label {
     font-size: 1rem;

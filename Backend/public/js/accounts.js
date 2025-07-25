@@ -2,26 +2,27 @@ const token = localStorage.getItem('token');
 const listDiv = document.getElementById('accountsList');
 const createAccountForm = document.getElementById('createAccountForm');
 const accountTypeSelect = document.getElementById('accountType');
+const messageDiv = document.getElementById('accountsMessage');
+
+function showMessage(msg, color = '#e53935') {
+  if (messageDiv) {
+    messageDiv.textContent = msg;
+    messageDiv.style.color = color;
+  }
+}
+function clearMessage() {
+  if (messageDiv) messageDiv.textContent = '';
+}
 
 if (!token) {
-  alert('Please login first');
-  window.location.href = 'index.html';
+  showMessage('Please login first.');
+  setTimeout(() => { window.location.href = 'index.html'; }, 1200);
 }
 
 // Fetch and display accounts
-fetch('http://localhost:8080/api/accounts', {
-  headers: { Authorization: `Bearer ${token}` },
-})
-  .then(res => res.json())
-  .then(accounts => {
-    if (!Array.isArray(accounts)) throw new Error('Invalid response');
-
-    if (accounts.length === 0) {
-      listDiv.innerHTML = '<p>No accounts found. Please create one.</p>';
-      return;
-    }
-
-    listDiv.innerHTML = `
+function renderAccountsTable(accounts) {
+  return `
+    <div class="table-responsive">
       <table>
         <thead>
           <tr>
@@ -39,30 +40,49 @@ fetch('http://localhost:8080/api/accounts', {
               <td>${acc._id}</td>
               <td>${acc.accountNumber}</td>
               <td>${acc.accountType}</td>
-              <td>$${acc.balance.toFixed(2)}</td>
+              <td>₹${acc.balance.toFixed(2)}</td>
               <td>${acc.isActive ? 'Active' : 'Inactive'}</td>
               <td><a href="transactions.html?id=${acc._id}">View</a></td>
             </tr>
           `).join('')}
         </tbody>
       </table>
-    `;
+    </div>
+  `;
+}
+
+function fetchAccounts() {
+  clearMessage();
+  fetch('http://localhost:8080/api/accounts', {
+    headers: { Authorization: `Bearer ${token}` },
   })
-  .catch(err => {
-    console.error(err);
-    listDiv.innerHTML = '<p>Error fetching accounts.</p>';
-  });
+    .then(res => res.json())
+    .then(accounts => {
+      if (!Array.isArray(accounts)) throw new Error('Invalid response');
+      if (accounts.length === 0) {
+        listDiv.innerHTML = '<p>No accounts found. Please create one.</p>';
+        return;
+      }
+      listDiv.innerHTML = renderAccountsTable(accounts);
+    })
+    .catch(err => {
+      console.error(err);
+      showMessage('Error fetching accounts.');
+      listDiv.innerHTML = '';
+    });
+}
+
+fetchAccounts();
 
 // Handle account creation
 createAccountForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-
+  clearMessage();
   const accountType = accountTypeSelect.value;
   if (!accountType) {
-    alert('Please select an account type');
+    showMessage('Please select an account type.');
     return;
   }
-
   try {
     const response = await fetch('http://localhost:8080/api/accounts', {
       method: 'POST',
@@ -72,64 +92,15 @@ createAccountForm.addEventListener('submit', async (e) => {
       },
       body: JSON.stringify({ accountType }),
     });
-
     const data = await response.json();
     if (response.ok) {
-      alert('Account created successfully!');
+      showMessage('Account created successfully!', '#388e3c');
       createAccountForm.reset();
-      // Reload the accounts list
       fetchAccounts();
     } else {
-      alert(data.message || 'Failed to create account');
+      showMessage(data.message || 'Failed to create account.');
     }
   } catch (error) {
-    alert('Error creating account: ' + error);
+    showMessage('Error creating account: ' + error);
   }
 });
-
-// Fetch accounts again after account creation
-function fetchAccounts() {
-  fetch('http://localhost:8080/api/accounts', {
-    headers: { Authorization: `Bearer ${token}` },
-  })
-    .then(res => res.json())
-    .then(accounts => {
-      if (!Array.isArray(accounts)) throw new Error('Invalid response');
-
-      if (accounts.length === 0) {
-        listDiv.innerHTML = '<p>No accounts found. Please create one.</p>';
-        return;
-      }
-
-      listDiv.innerHTML = `
-        <table>
-          <thead>
-            <tr>
-              <th>Account ID</th>
-              <th>Account Number</th>
-              <th>Type</th>
-              <th>Balance</th>
-              <th>Status</th>
-              <th>Transactions</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${accounts.map(acc => `
-              <tr>
-                <td>${acc._id}</td>
-                <td>${acc.accountNumber}</td>
-                <td>${acc.accountType}</td>
-                <td>$${acc.balance.toFixed(2)}</td>
-                <td>${acc.isActive ? 'Active' : 'Inactive'}</td>
-                <td><a href="transactions.html?id=${acc._id}">View</a></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
-    })
-    .catch(err => {
-      console.error(err);
-      listDiv.innerHTML = '<p>Error fetching accounts.</p>';
-    });
-}
